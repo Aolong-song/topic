@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/oomall?serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countsql
