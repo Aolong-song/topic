@@ -20,11 +20,11 @@ public class TopicServiceImpl implements TopicService {
     public List<Topic> list(){
         return topicMapper.list();
     }
+
     @Override
     public Topic detail(Integer id){
         return topicMapper.detail(id);
     }
-
 
     @Override
     public Topic create( Topic topic) {

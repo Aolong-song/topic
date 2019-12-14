@@ -52,7 +52,7 @@ public class TopicController {
     public Object detail(@NotNull @PathVariable(value = "id") Integer id) {
         Topic detail = topicService.detail(id);
         Object retObj;
-        if(detail.getId()==null){
+        if(!detail.getId().equals(id)){
             retObj = ResponseUtil.updatedDataFailed();
         }else{
             retObj = ResponseUtil.ok(detail);

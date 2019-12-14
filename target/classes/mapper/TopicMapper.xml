@@ -28,17 +28,16 @@
             pic_url_list,
             content
         )values(
-            #{gmtCreate},
-            #{gmtModified},
-            #{beDeleted},
+            CURRENT_TIMESTAMP,
+            CURRENT_TIMESTAMP,
+            0,
             #{picUrlList},
             #{content}
         )
     </insert>
     <update id="update" parameterType="com.example.topic.domain.Topic">
         update topic
-        set gmt_create=#{gmtCreate},
-            gmt_modified=#{gmtModified},
+        set gmt_modified=CURRENT_TIMESTAMP,
             is_deleted=#{beDeleted},
             pic_url_list=#{picUrlList},
             content=#{content}
