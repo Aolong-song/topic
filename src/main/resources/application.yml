@@ -1,10 +1,10 @@
 spring:
   application:
-    name: topicService
+    name: Topic
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/oomall?serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://112.124.5.232:3306/oomall?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: root
+    password: 12345678
     driver-class-name: com.mysql.jdbc.Driver
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -16,8 +16,10 @@ pagehelper:
   support-methods-arguments: true
   params: count=countsql
 server:
-  port: 8082
+  port: 8013
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8080/eureka/
+      defaultZone: http://112.124.5.232:8011/eureka/
+web:
+  path: /picture

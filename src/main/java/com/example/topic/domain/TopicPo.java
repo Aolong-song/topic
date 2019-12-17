@@ -1,5 +1,6 @@
 package com.example.topic.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,9 @@ public class TopicPo {
      */
     private String content;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtCreate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtModified;
     private Boolean beDeleted;
 

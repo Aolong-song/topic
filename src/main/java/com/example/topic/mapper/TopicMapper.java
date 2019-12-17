@@ -1,6 +1,6 @@
 package com.example.topic.mapper;
 
-import com.example.topic.domain.Topic;
+import com.example.topic.domain.TopicPo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -17,7 +17,7 @@ public interface TopicMapper {
      *
      * @return 专题列表
      */
-    List<Topic> list();
+    List<TopicPo> list();
 
     /**
      * 专题详情
@@ -25,26 +25,36 @@ public interface TopicMapper {
      * @param id 专题ID
      * @return 专题详情
      */
-    Topic detail(@Param(value = "id") Integer id);
+    TopicPo detail(@Param(value = "id") Integer id);
 
     /**
      * 生成专题
      *
-     * @param topic 专题信息
+     * @param topicPo 专题信息
+     * @return 数据库操作状态 0-数据库操作失败 1-数据库操作成功
      */
-    void create(Topic topic);
+    int create(TopicPo topicPo);
 
     /**
      * 更新专题
      *
-     * @param topic 专题信息
+     * @param topicPo 专题信息
+     * @return 数据库操作状态 0-数据库操作失败 1-数据库操作成功
      */
-    void update(Topic topic);
+    int update(TopicPo topicPo);
 
     /**
      * 删除专题
      *
      * @param id 专题ID
+     * @return 数据库操作状态 0-数据库操作失败 1-数据库操作成功
      */
-    void delete(@Param(value = "id") Integer id);
+    int delete(@Param(value = "id") Integer id);
+
+    /**
+     * 专题查重 防止重复创建专题
+     * @param topicPo
+     * @return topic专题信息
+     */
+    TopicPo beExist(TopicPo topicPo);
 }
