@@ -39,17 +39,12 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public TopicPo update(TopicPo topicPo, Integer id){
-        if(topicMapper.detail(id)==null){
-            topicPo.setId(-2);
-            return topicPo;
-        }else {
             topicPo.setId(id);
             if(topicMapper.update(topicPo)==0){
                 topicPo.setId(-1);
                 return  topicPo;
             }
             return topicMapper.detail(id);
-        }
     }
 
     @Override

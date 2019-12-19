@@ -10,26 +10,4 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
-  <component name="RemoteRepositoriesConfiguration">
-    <remote-repository>
-      <option name="id" value="central" />
-      <option name="name" value="Maven Central repository" />
-      <option name="url" value="https://repo1.maven.org/maven2" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="jboss.community" />
-      <option name="name" value="JBoss Community repository" />
-      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="e5e639ae-4571-43a6-a434-68aa7116cd5a" />
-      <option name="name" value="e5e639ae-4571-43a6-a434-68aa7116cd5a" />
-      <option name="url" value="https://maven.aliyun.com/nexus/content/repositories/central" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="9e5aaa27-d687-4265-a8e6-d6177b3d1239" />
-      <option name="name" value="9e5aaa27-d687-4265-a8e6-d6177b3d1239" />
-      <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public/" />
-    </remote-repository>
-  </component>
 </project>

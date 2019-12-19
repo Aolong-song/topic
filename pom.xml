@@ -109,6 +109,13 @@
             <version>RELEASE</version>
         </dependency>
 
+        <!-- 内部接口依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>

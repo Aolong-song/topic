@@ -1,6 +1,6 @@
 spring:
   application:
-    name: Topic
+    name: topicService
   datasource:
     url: jdbc:mysql://112.124.5.232:3306/oomall?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
@@ -23,3 +23,5 @@ eureka:
       defaultZone: http://112.124.5.232:8011/eureka/
 web:
   path: /picture
+host: 112.124.5.232
+port: 8012
