@@ -13,12 +13,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author 宋澳龙
- * @date 2019/12/18 7:47
- */
-
-
 public class JacksonUtil {
 
     private static final Log logger = LogFactory.getLog(JacksonUtil.class);
@@ -57,6 +51,25 @@ public class JacksonUtil {
         }
         return null;
     }
+
+    public static <T> List<T> parseObjectList(String body, String field, Class<T> clazz ) {
+        ObjectMapper mapper = new ObjectMapper().registerModule(new Jdk8Module())
+                .registerModule(new JavaTimeModule());;
+        JsonNode node;
+        try {
+            node = mapper.readTree(body);
+            JsonNode leaf = node.get(field);
+
+            if (leaf != null) {
+                return mapper.convertValue(leaf, new TypeReference<List<T>>() {
+                });
+            }
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
 
     public static Integer parseInteger(String body, String field) {
         ObjectMapper mapper = new ObjectMapper().registerModule(new Jdk8Module())
@@ -145,7 +158,7 @@ public class JacksonUtil {
 
     public static <T> T parseObject(String body, String field, Class<T> clazz) {
         ObjectMapper mapper = new ObjectMapper().registerModule(new Jdk8Module())
-                .registerModule(new JavaTimeModule());
+                .registerModule(new JavaTimeModule());;
         JsonNode node;
         try {
             node = mapper.readTree(body);

@@ -32,7 +32,7 @@ public class getTopicsId {
     @Test
     public void detailRight() throws Exception{
         /* 设置请求头部*/
-        URI uri = new URI(url.replace("{id}","2"));
+        URI uri = new URI(url.replace("{id}","5"));
         HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
         HttpEntity httpEntity = new HttpEntity(httpHeaders);
 
@@ -49,15 +49,15 @@ public class getTopicsId {
 
         /*assert判断*/
         Topic topic = JacksonUtil.parseObject(body, "data", Topic.class);
-        assertEquals(2,topic.getId());
-        assertEquals("测试用例picurllist",topic.getPicUrlList());
+        assertEquals(5,topic.getId());
+        assertEquals("测试用例urllist",topic.getPicUrlList());
         assertEquals("测试用例content",topic.getContent());
     }
 
     @Test
     public void detailId() throws Exception{
         /* 设置请求头部*/
-        URI uri = new URI(url.replace("{id}","-1"));
+        URI uri = new URI(url.replace("{id}","999"));
         HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
         HttpEntity httpEntity = new HttpEntity(httpHeaders);
 
@@ -73,5 +73,22 @@ public class getTopicsId {
         assertNotEquals(500, status);
     }
 
+    @Test
+    public void detailIdNegative() throws Exception{
+        /* 设置请求头部*/
+        URI uri = new URI(url.replace("{id}","-1"));
+        HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
+        HttpEntity httpEntity = new HttpEntity(httpHeaders);
 
+        /*exchange方法模拟HTTP请求*/
+        ResponseEntity<String> response = testRestTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        /*取得响应体*/
+        String body = response.getBody();
+        Integer errno = JacksonUtil.parseInteger(body, "errno");
+        Integer status = JacksonUtil.parseInteger(body, "status");
+        assertEquals(580, errno);
+        assertNotEquals(500, status);
+    }
 }

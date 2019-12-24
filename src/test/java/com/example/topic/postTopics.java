@@ -1,6 +1,5 @@
 package com.example.topic;
 
-import com.example.topic.domain.Topic;
 import com.example.topic.domain.TopicPo;
 import com.example.topic.util.JacksonUtil;
 import org.junit.Test;
@@ -37,7 +36,7 @@ public class postTopics {
         HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
         TopicPo topicPo = new TopicPo();
         topicPo.setPicUrlList("https://www.baidu.com/");
-        topicPo.setContent("百度");
+        topicPo.setContent("百度1");
         HttpEntity httpEntity = new HttpEntity(topicPo,httpHeaders);
 
         /*exchange方法模拟HTTP请求*/
@@ -54,28 +53,30 @@ public class postTopics {
         /*assert判断*/
         HashMap topic = JacksonUtil.parseObject(body, "data", HashMap.class);
         assertEquals("https://www.baidu.com/",topic.get("picUrlList"));
-        assertEquals("百度",topic.get("content"));
+        assertEquals("百度1",topic.get("content"));
     }
 
-//    @Test
-//    public void createNull()throws Exception{
-//        /* 设置请求头部*/
-//        URI uri = new URI(url);
-//        HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
-//        TopicPo topicPo = null;
-//        HttpEntity httpEntity = new HttpEntity(topicPo,httpHeaders);
-//
-//        /*exchange方法模拟HTTP请求*/
-//        ResponseEntity<String> response = testRestTemplate.exchange(uri, HttpMethod.POST, httpEntity, String.class);
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//
-//        /*取得响应体*/
-//        String body = response.getBody();
-//        Integer errno = JacksonUtil.parseInteger(body, "errno");
-//        Integer status = JacksonUtil.parseInteger(body, "status");
-//        assertEquals(402, errno);
-//        assertNotEquals(500, status);
-//    }
+    @Test
+    public void createNull()throws Exception{
+        /* 设置请求头部*/
+        URI uri = new URI(url);
+        HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
+        TopicPo topicPo = new TopicPo();
+        topicPo.setPicUrlList(null);
+        topicPo.setContent(null);
+        HttpEntity httpEntity = new HttpEntity(topicPo,httpHeaders);
+
+        /*exchange方法模拟HTTP请求*/
+        ResponseEntity<String> response = testRestTemplate.exchange(uri, HttpMethod.POST, httpEntity, String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        /*取得响应体*/
+        String body = response.getBody();
+        Integer errno = JacksonUtil.parseInteger(body, "errno");
+        Integer status = JacksonUtil.parseInteger(body, "status");
+        assertEquals(652, errno);
+        assertNotEquals(500, status);
+    }
 
     @Test
     public void createBeExist() throws Exception{
@@ -83,7 +84,7 @@ public class postTopics {
         URI uri = new URI(url);
         HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
         TopicPo topicPo = new TopicPo();
-        topicPo.setContent("百度");
+        topicPo.setContent("百度1");
         topicPo.setPicUrlList("https://www.baidu.com/");
         HttpEntity httpEntity = new HttpEntity(topicPo,httpHeaders);
 

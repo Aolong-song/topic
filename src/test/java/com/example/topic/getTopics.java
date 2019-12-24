@@ -1,6 +1,5 @@
 package com.example.topic;
 
-import com.example.topic.domain.Topic;
 import com.example.topic.util.JacksonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,41 +54,32 @@ public class getTopics {
         for(HashMap item : topicList){
             assertNotEquals(null,item.get("id"));
         }
+
+//         /*assert判断*/
+//        List<TopicPo> topicList = JacksonUtil.parseObjectList(body, "data",TopicPo.class);
+//        for(TopicPo item : topicList){
+//            assertNotEquals(null,item.getId());
+//        }
     }
 
-//    @Test
-//    public void listPage() throws Exception{
-//        /* 设置请求头部*/
-//        URI uri = new URI(url.replace("topics","topics?page=-1"));
-//        HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
-//        HttpEntity httpEntity = new HttpEntity(httpHeaders);
-//
-//        /*exchange方法模拟HTTP请求*/
-//        ResponseEntity<String> response = testRestTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class);
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//
-//        /*取得响应体*/
-//        String body = response.getBody();
-//        Integer errno = JacksonUtil.parseInteger(body, "errno");
-//        Integer status = JacksonUtil.parseInteger(body, "status");
-//        assertEquals(402, errno);
-//    }
-//
-//    @Test
-//    public void listLimit() throws Exception{
-//        /* 设置请求头部*/
-//        URI uri = new URI(url.replace("topics","topics?limit=-1"));
-//        HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
-//        HttpEntity httpEntity = new HttpEntity(httpHeaders);
-//
-//        /*exchange方法模拟HTTP请求*/
-//        ResponseEntity<String> response = testRestTemplate.exchange(uri, HttpMethod.GET, httpEntity, String.class);
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//
-//        /*取得响应体*/
-//        String body = response.getBody();
-//        Integer errno = JacksonUtil.parseInteger(body, "errno");
-//        Integer status = JacksonUtil.parseInteger(body, "status");
-//        assertEquals(402, errno);
-//    }
+    @Test
+    public void listPageLimitNegative() throws Exception{
+        /* 设置请求头部*/
+        URI uri = new URI(url.replace("topics","topics?page=-1&limit=-1"));
+        HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
+        HttpEntity httpEntity = new HttpEntity(httpHeaders);
+
+        /*exchange方法模拟HTTP请求*/
+        ResponseEntity<String> response = testRestTemplate.exchange(uri, HttpMethod.PUT, httpEntity, String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        /*取得响应体*/
+        String body = response.getBody();
+        Integer errno = JacksonUtil.parseInteger(body, "errno");
+        Integer status = JacksonUtil.parseInteger(body, "status");
+        assertEquals(580, errno);
+        assertNotEquals(500, status);
+    }
+
+
 }

@@ -2,7 +2,6 @@ package com.example.topic.service.serviceimpl;
 
 import com.example.topic.domain.TopicPo;
 import com.example.topic.mapper.TopicMapper;
-import com.example.topic.domain.Topic;
 import com.example.topic.service.TopicService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;

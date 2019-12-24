@@ -1,6 +1,5 @@
 package com.example.topic.service;
 
-import com.example.topic.domain.Topic;
 import com.example.topic.domain.TopicPo;
 import org.springframework.stereotype.Service;
 import java.util.List;

@@ -9,9 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.net.URI;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -43,14 +41,14 @@ public class deleteTopicsId {
         String body = response.getBody();
         Integer errno = JacksonUtil.parseInteger(body, "errno");
         Integer status = JacksonUtil.parseInteger(body, "status");
-        assertEquals(200, errno);
+        assertEquals(0, errno);
         assertNotEquals(500, status);
     }
 
     @Test
-    public void deleteId()throws Exception{
+    public void deleteIdNull()throws Exception{
         /* 设置请求头部*/
-        URI uri = new URI(url.replace("{id}","-1"));
+        URI uri = new URI(url.replace("{id}","999"));
         HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
         HttpEntity httpEntity = new HttpEntity(httpHeaders);
 
@@ -66,4 +64,22 @@ public class deleteTopicsId {
         assertNotEquals(500, status);
     }
 
+    @Test
+    public void deleteIdNegative()throws Exception{
+        /* 设置请求头部*/
+        URI uri = new URI(url.replace("{id}","-1"));
+        HttpHeaders httpHeaders = testRestTemplate.headForHeaders(uri);
+        HttpEntity httpEntity = new HttpEntity(httpHeaders);
+
+        /*exchange方法模拟HTTP请求*/
+        ResponseEntity<String> response = testRestTemplate.exchange(uri, HttpMethod.DELETE, httpEntity, String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        /*取得响应体*/
+        String body = response.getBody();
+        Integer errno = JacksonUtil.parseInteger(body, "errno");
+        Integer status = JacksonUtil.parseInteger(body, "status");
+        assertEquals(580, errno);
+        assertNotEquals(500, status);
+    }
 }
